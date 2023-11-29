@@ -15,6 +15,8 @@ def execute_values(df, table):
     query  = "INSERT INTO %s(%s) VALUES %%s" % (table, cols)
     cursor = conn.cursor()
     try:
+        print("Inserting data to %s" % table)
+        print(cols)
         extras.execute_values(cursor, query, tuples)
         conn.commit()
     except (Exception, psycopg2.DatabaseError) as error:
@@ -46,20 +48,20 @@ def load_data(**context):
 
     # Insert data ke tabel orders
     execute_values(df_order, 'orders')
-    # Insert data ke tabel customer
-    execute_values(df_customer, 'customer')
+    # Insert data ke tabel customers
+    execute_values(df_customer, 'customers')
     # Insert data ke tabel coupons
     execute_values(df_coupons, 'coupons')
-    # Insert data ke tabel login_attempts
-    execute_values(df_login_attempts, 'login_attempts')
-    # Insert data ke tabel product_category
-    execute_values(df_product_category, 'product_category')
-    # Insert data ke tabel product
-    execute_values(df_product, 'product')
-    # Insert data ke tabel supplier
-    execute_values(df_supplier, 'supplier')
-    # Insert data ke tabel order_item
-    execute_values(df_order_item, 'order_item')
+    # Insert data ke tabel login_attempt_history
+    execute_values(df_login_attempts, 'login_attempt_history')
+    # Insert data ke tabel product_categories
+    execute_values(df_product_category, 'product_categories')
+    # Insert data ke tabel products
+    execute_values(df_product, 'products')
+    # Insert data ke tabel suppliers
+    execute_values(df_supplier, 'suppliers')
+    # Insert data ke tabel order_items
+    execute_values(df_order_item, 'order_items')
 
     conn.close()
 

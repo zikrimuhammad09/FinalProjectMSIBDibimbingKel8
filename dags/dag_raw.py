@@ -84,6 +84,13 @@ extract_order_item = PythonOperator(
     dag             = dag2
 )
 
+transform_task = PythonOperator(
+    task_id         = "transform_data",
+    python_callable = etl.transform_data,
+    provide_context = True,
+    dag             = dag2
+)
+
 load_task = PythonOperator(
     task_id         = "load_data",
     python_callable = etl.load_data,
@@ -91,4 +98,4 @@ load_task = PythonOperator(
     dag             = dag2
 )
 
-create_table >> [extract_order, extract_customer, extract_coupons, extract_login_attempts, extract_product_category, extract_product, extract_supplier, extract_order_item] >> load_task
+create_table >> [extract_order, extract_customer, extract_coupons, extract_login_attempts, extract_product_category, extract_product, extract_supplier, extract_order_item] >> transform_task >> load_task

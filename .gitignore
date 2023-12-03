@@ -159,5 +159,7 @@ cython_debug/
 #.idea/
 .vscode/
 __exploration.ipynb
-logs/*
-!logs/.gitkeep
+logs/dag_id=dag2/*
+logs/dag_processor_manager/*
+!logs/scheduler.gitkeep
+logs/scheduler/*

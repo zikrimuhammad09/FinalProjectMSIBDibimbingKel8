@@ -15,6 +15,18 @@ def create_table():
         cursor.execute('CREATE TABLE IF NOT EXISTS products (id INTEGER, name VARCHAR(100), price FLOAT, category_id INTEGER, supplier_id INTEGER)')
         cursor.execute('CREATE TABLE IF NOT EXISTS suppliers (id INTEGER, name VARCHAR(100), country VARCHAR(100))')
         cursor.execute('CREATE TABLE IF NOT EXISTS order_items (id INTEGER, order_id INTEGER, product_id INTEGER, amount INTEGER, coupon_id INTEGER)')
+
+        # Buat relasi antar tabel
+        cursor.execute('ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES customers (id)')
+        cursor.execute('ALTER TABLE login_attempt_history ADD FOREIGN KEY (customer_id) REFERENCES customers (id)')
+        cursor.execute('ALTER TABLE products ADD FOREIGN KEY (category_id) REFERENCES product_categories (id)')
+        cursor.execute('ALTER TABLE products ADD FOREIGN KEY (supplier_id) REFERENCES suppliers (id)')
+        cursor.execute('ALTER TABLE order_items ADD FOREIGN KEY (order_id) REFERENCES orders (id)')
+        cursor.execute('ALTER TABLE order_items ADD FOREIGN KEY (product_id) REFERENCES products (id)')
+        cursor.execute('ALTER TABLE order_items ADD FOREIGN KEY (coupon_id) REFERENCES coupons (id)')
+
+
+
         conn.commit()
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error: %s" % error)

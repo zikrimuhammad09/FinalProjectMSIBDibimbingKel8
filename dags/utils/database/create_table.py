@@ -9,6 +9,7 @@ def create_table():
         # Buat tabel orders, customers, coupons, login_attempt_history, product_categories, products, suppliers, order_items
         cursor.execute('CREATE TABLE IF NOT EXISTS orders (id INTEGER PRIMARY KEY, customer_id INTEGER, status TEXT, created_at TIMESTAMP)')
         cursor.execute('CREATE TABLE IF NOT EXISTS coupons (id INTEGER PRIMARY KEY, discount_percent FLOAT)')
+        cursor.execute('CREATE TABLE IF NOT EXISTS zip_codes (zip_code INTEGER PRIMARY KEY, lat VARCHAR(100), lng VARCHAR(100), city VARCHAR(100),state_id VARCHAR(100), state_name VARCHAR(100))')
         cursor.execute('CREATE TABLE IF NOT EXISTS customers (id INTEGER PRIMARY KEY, first_name VARCHAR(80), last_name VARCHAR(80), address VARCHAR(255), gender VARCHAR(20), zip_code VARCHAR(20))')
         cursor.execute('CREATE TABLE IF NOT EXISTS login_attempt_history (id INTEGER PRIMARY KEY, customer_id INTEGER, login_successfull BOOLEAN, attempted_at TIMESTAMP)')
         cursor.execute('CREATE TABLE IF NOT EXISTS product_categories (id INTEGER PRIMARY KEY, name VARCHAR(100))')
@@ -18,6 +19,7 @@ def create_table():
 
         # Buat relasi antar tabel
         cursor.execute('ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES customers (id)')
+        cursor.execute('ALTER TABLE customers ADD FOREIGN KEY (zip_code) REFERENCES zip_code (zip_codes)')
         cursor.execute('ALTER TABLE login_attempt_history ADD FOREIGN KEY (customer_id) REFERENCES customers (id)')
         cursor.execute('ALTER TABLE products ADD FOREIGN KEY (category_id) REFERENCES product_categories (id)')
         cursor.execute('ALTER TABLE products ADD FOREIGN KEY (supplier_id) REFERENCES suppliers (id)')

@@ -1,6 +1,6 @@
 import glob
 import pandas as pd
-import fastavro
+import polars
 # Extract data order dari file parquet
 def extract_order(**context):
     df = pd.read_parquet('data/order.parquet', engine='fastparquet')
@@ -51,9 +51,14 @@ def extract_supplier(**context):
 
 # Extract data order_item dari file avro
 def extract_order_item(**context):
-    with open('data/order_item.avro', 'rb') as fo:
-        avro_reader = fastavro.reader(fo)
-        df = pd.DataFrame.from_records(avro_reader)
+    df = polars.read_avro('data/order_item.avro')
+    df = df.to_pandas()
     print(df.head())
+    # df = df.write_json(row_oriented=True)
     return context['ti'].xcom_push(key='df_order_item',value=df)
-    
+
+# Extract data US Zip code dari file csv
+def extract_zip_code(**context):
+    df = pd.read_csv('data/zip_code.csv')
+    print(df.head())
+    return context['ti'].xcom_push(key='df_zip_code',value=df)

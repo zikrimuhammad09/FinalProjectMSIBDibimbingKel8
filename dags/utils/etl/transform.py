@@ -28,7 +28,7 @@ def transform_data(**context):
     df_product = context['ti'].xcom_pull(key='df_product')
     df_supplier = context['ti'].xcom_pull(key='df_supplier')
     df_order_item = context['ti'].xcom_pull(key='df_order_item')
-    df_zip_code = context['ti'].xcom_pull(key='df_zip_code')
+    # df_zip_code = context['ti'].xcom_pull(key='df_zip_code')
 
     print("Transforming data...")
 
@@ -41,7 +41,7 @@ def transform_data(**context):
     df_login_attempts.drop(df_login_attempts[df_login_attempts['customer_id'] == 10000].index, inplace=True)
 
     # Ambil kolom zip, lat , lng, city, state_id, dan state_name dari df_zip_code
-    df_zip_code = df_zip_code[['zip', 'lat', 'lng', 'city', 'state_id', 'state_name']]
+    # df_zip_code = df_zip_code[['zip', 'lat', 'lng', 'city', 'state_id', 'state_name']]
 
     # remove kolom pertama dari df_customer
     df_customer.drop(df_customer.columns[0], axis=1, inplace=True)
@@ -53,7 +53,7 @@ def transform_data(**context):
     df_login_attempts.rename(columns={'login_successful': 'login_successfull'}, inplace=True)
 
     # remove data yang duplikat, missing value
-    for df in [df_order, df_customer, df_coupons, df_login_attempts, df_product_category, df_product, df_supplier, df_order_item, df_zip_code]:
+    for df in [df_order, df_customer, df_coupons, df_login_attempts, df_product_category, df_product, df_supplier, df_order_item]:
         remove_duplicates(df)
         remove_missing_values(df)
 
@@ -66,7 +66,7 @@ def transform_data(**context):
     context['ti'].xcom_push(key='df_product', value=df_product)
     context['ti'].xcom_push(key='df_supplier', value=df_supplier)
     context['ti'].xcom_push(key='df_order_item', value=df_order_item)
-    context['ti'].xcom_push(key='df_zip_code', value=df_zip_code)
+    # context['ti'].xcom_push(key='df_zip_code', value=df_zip_code)
 
     return "Sukses Transform Data"
 

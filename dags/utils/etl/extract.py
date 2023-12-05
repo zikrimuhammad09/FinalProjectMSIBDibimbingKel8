@@ -58,7 +58,7 @@ def extract_order_item(**context):
     return context['ti'].xcom_push(key='df_order_item',value=df)
 
 # Extract data US Zip code dari file csv
-def extract_zip_code(**context):
-    df = pd.read_csv('data/zip_code.csv')
-    print(df.head())
-    return context['ti'].xcom_push(key='df_zip_code',value=df)
+# def extract_zip_code(**context):
+#     df = pd.read_csv('data/zip_code.csv')
+#     print(df.head())
+#     return context['ti'].xcom_push(key='df_zip_code',value=df)

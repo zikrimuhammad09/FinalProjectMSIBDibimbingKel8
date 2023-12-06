@@ -3,6 +3,8 @@ import pandas as pd
 def remove_duplicates(df):
     print("Checking duplicates...")
     print("Before: ", df.shape)
+    # set kolom id dari masing2 tabel menjadi index
+    df.set_index('id')
     df.drop_duplicates(inplace=True)    
     print("After: ", df.shape)
 
@@ -15,6 +17,8 @@ def remove_missing_values(df):
         # Ubah kolom coupon_id di df_order_item yang missing value menjadi 0
         df['coupon_id'].fillna(0, inplace=True)
     elif is_null.sum() > 0:
+        # set kolom id dari masing2 tabel menjadi index
+        df.set_index('id')
         # Hapus missing value
         df.dropna(inplace=True)
 

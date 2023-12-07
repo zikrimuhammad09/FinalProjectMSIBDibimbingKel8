@@ -44,9 +44,6 @@ def transform_data(**context):
     # Drop customer_id 10000 dari df_login_attempts
     df_login_attempts.drop(df_login_attempts[df_login_attempts['customer_id'] == 10000].index, inplace=True)
 
-    # Ambil kolom zip, lat , lng, city, state_id, dan state_name dari df_zip_code
-    # df_zip_code = df_zip_code[['zip', 'lat', 'lng', 'city', 'state_id', 'state_name']]
-
     # remove kolom pertama dari df_customer
     df_customer.drop(df_customer.columns[0], axis=1, inplace=True)
 
@@ -70,7 +67,6 @@ def transform_data(**context):
     context['ti'].xcom_push(key='df_product', value=df_product)
     context['ti'].xcom_push(key='df_supplier', value=df_supplier)
     context['ti'].xcom_push(key='df_order_item', value=df_order_item)
-    # context['ti'].xcom_push(key='df_zip_code', value=df_zip_code)
 
     return "Sukses Transform Data"
 

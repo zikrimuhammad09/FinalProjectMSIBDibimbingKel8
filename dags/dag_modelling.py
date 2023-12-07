@@ -78,5 +78,17 @@ create_fact_sales = PythonOperator(
     provide_context = True,
     dag             = dag_modelling
 )
+create_fact_customer_conversion_rates = PythonOperator(
+    task_id         = "create_fact_customer_conversion_rates",
+    python_callable = data_modelling.create_fact_customer_conversion_rates,
+    provide_context = True,
+    dag             = dag_modelling
+)
+create_fact_popular_products = PythonOperator(
+    task_id         = "create_fact_popular_products",
+    python_callable = data_modelling.create_fact_popular_products,
+    provide_context = True,
+    dag             = dag_modelling
+)
 
-create_schema >> [create_dim_coupons >> create_dim_customers >> create_dim_date >> create_dim_orders >> create_dim_products >> create_product_categories >> create_suppliers >> create_fact_login_attempt_history >> create_fact_sales]
+create_schema >> [create_dim_coupons >> create_dim_customers >> create_dim_date >> create_dim_orders >> create_product_categories >> create_suppliers >> create_dim_products  >> create_fact_login_attempt_history >> create_fact_sales >> create_fact_customer_conversion_rates >> create_fact_popular_products]

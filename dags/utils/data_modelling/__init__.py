@@ -8,3 +8,5 @@ from .model import create_fact_login_attempt_history
 from .model import create_fact_sales
 from .model import create_product_categories
 from .model import create_suppliers
+from .model import create_fact_customer_conversion_rates
+from .model import create_fact_popular_products

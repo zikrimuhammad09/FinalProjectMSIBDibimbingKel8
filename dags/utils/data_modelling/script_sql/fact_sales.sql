@@ -7,16 +7,16 @@ CREATE TABLE data_modelling.fact_sales (
     coupon_id INT,
     amount INT,
     total_price INT,
-    date_id TIMESTAMP,
+    purchase_dates TIMESTAMP,
 
-    FOREIGN KEY (order_id) REFERENCES dim_orders(id),
-    FOREIGN KEY (product_id) REFERENCES dim_products(id),
-    FOREIGN KEY (coupon_id) REFERENCES COUPONS(id),
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(id),
-    FOREIGN KEY (date_id) REFERENCES DIM_DATE(date_id)
+    FOREIGN KEY (order_id) REFERENCES data_modelling.dim_orders(id),
+    FOREIGN KEY (product_id) REFERENCES data_modelling.dim_products(id),
+    FOREIGN KEY (coupon_id) REFERENCES data_modelling.dim_coupons(id),
+    FOREIGN KEY (customer_id) REFERENCES data_modelling.dim_customers(id),
+    FOREIGN KEY (purchase_dates) REFERENCES data_modelling.dim_date(purchase_dates)
 );
 
-INSERT INTO data_modelling.fact_sales(order_id,product_id,customer_id,coupon_id,amount,total_price,date_id)
+INSERT INTO data_modelling.fact_sales(order_id,product_id,customer_id,coupon_id,amount,total_price,purchase_dates)
 SELECT 
     oi.order_id,
     oi.product_id,

@@ -91,6 +91,36 @@ def create_dim_products():
     # Menutup koneksi
     cursor.close()
     conn.close()
+    
+def create_product_categories():
+    # Membuat objek kursor
+    cursor = conn.cursor()
+
+    # Membaca dan menjalankan isi file SQL
+    sql_file = open('dags/utils/data_modelling/script_sql/product_categories.sql', 'r')
+    cursor.execute(sql_file.read())
+
+    # Commit perubahan (penting untuk perubahan yang mengubah data)
+    conn.commit()
+
+    # Menutup koneksi
+    cursor.close()
+    conn.close()
+
+def create_suppliers():
+    # Membuat objek kursor
+    cursor = conn.cursor()
+
+    # Membaca dan menjalankan isi file SQL
+    sql_file = open('dags/utils/data_modelling/script_sql/suppliers.sql', 'r')
+    cursor.execute(sql_file.read())
+
+    # Commit perubahan (penting untuk perubahan yang mengubah data)
+    conn.commit()
+
+    # Menutup koneksi
+    cursor.close()
+    conn.close()
 
 def create_fact_login_attempt_history():
     # Membuat objek kursor
@@ -121,33 +151,33 @@ def create_fact_sales():
     # Menutup koneksi
     cursor.close()
     conn.close()
-    
-def create_product_categories():
+
+def create_fact_customer_conversion_rates():
     # Membuat objek kursor
     cursor = conn.cursor()
 
     # Membaca dan menjalankan isi file SQL
-    sql_file = open('dags/utils/data_modelling/script_sql/product_categories.sql', 'r')
+    sql_file = open('dags/utils/data_modelling/script_sql/fact_customer_conversion_rates.sql', 'r')
     cursor.execute(sql_file.read())
 
     # Commit perubahan (penting untuk perubahan yang mengubah data)
     conn.commit()
-
+    
     # Menutup koneksi
     cursor.close()
     conn.close()
 
-def create_suppliers():
+def create_fact_popular_products():
     # Membuat objek kursor
     cursor = conn.cursor()
-
+    
     # Membaca dan menjalankan isi file SQL
-    sql_file = open('dags/utils/data_modelling/script_sql/suppliers.sql', 'r')
+    sql_file = open('dags/utils/data_modelling/script_sql/fact_popular_products.sql', 'r')
     cursor.execute(sql_file.read())
-
+    
     # Commit perubahan (penting untuk perubahan yang mengubah data)
     conn.commit()
-
+    
     # Menutup koneksi
     cursor.close()
     conn.close()

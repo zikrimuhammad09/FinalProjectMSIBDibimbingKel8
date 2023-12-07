@@ -8,5 +8,11 @@ CREATE TABLE data_modelling.dim_customers (
     zip_code VARCHAR(10)
 );
 INSERT INTO data_modelling.dim_customers (id, first_name, last_name, address, gender, zip_code)
-SELECT id, first_name, last_name, address, gender, zip_code
+SELECT
+    id, 
+    first_name, 
+    last_name, 
+    address, 
+    gender, 
+    zip_code
 FROM public.customers;

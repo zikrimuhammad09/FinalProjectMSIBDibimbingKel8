@@ -30,8 +30,6 @@ def create_table():
         print("Error: %s" % error)
         conn.rollback() 
         cursor.close()
-        # stop task
-
         return 1
     cursor.close()
     conn.close()

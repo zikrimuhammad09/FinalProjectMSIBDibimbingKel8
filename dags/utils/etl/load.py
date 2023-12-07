@@ -37,7 +37,6 @@ def load_data(**context):
     df_product = context['ti'].xcom_pull(key='df_product')
     df_supplier = context['ti'].xcom_pull(key='df_supplier')
     df_order_item = context['ti'].xcom_pull(key='df_order_item')
-    # df_zip_code = context['ti'].xcom_pull(key='df_zip_code')
     print(df_order.head())
     print(df_customer.head())
     print(df_coupons.head())
@@ -46,7 +45,6 @@ def load_data(**context):
     print(df_product.head())
     print(df_supplier.head())
     print(df_order_item.head())
-    # print(df_zip_code.head())
 
     # # Insert data ke tabel zip_codes
     # execute_values(df_zip_code, 'zip_codes')

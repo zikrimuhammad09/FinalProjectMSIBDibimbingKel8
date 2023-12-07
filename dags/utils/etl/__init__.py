@@ -6,7 +6,6 @@ from .extract import extract_product_category
 from .extract import extract_product
 from .extract import extract_supplier
 from .extract import extract_order_item
-# from .extract import extract_zip_code
 
 from .load import load_data
 

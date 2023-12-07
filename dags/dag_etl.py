@@ -82,13 +82,6 @@ extract_order_item = PythonOperator(
     dag             = dag_etl
 )
 
-# extract_zip_code = PythonOperator(
-#     task_id         = "extract_zip_code",
-#     python_callable = etl.extract_zip_code,
-#     provide_context = True,
-#     dag             = dag_etl
-# )
-
 transform_task = PythonOperator(
     task_id         = "transform_data",
     python_callable = etl.transform_data,

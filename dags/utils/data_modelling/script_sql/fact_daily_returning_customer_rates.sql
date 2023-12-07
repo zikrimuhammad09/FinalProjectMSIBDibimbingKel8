@@ -12,7 +12,7 @@ SELECT
     o.created_at AS date,
     COUNT(DISTINCT CASE WHEN order_count > 1 THEN customer_id END) AS returning_customers,
     COUNT(DISTINCT customer_id) AS total_customers,
-    (COUNT(DISTINCT CASE WHEN order_count > 1 THEN customer_id END) / NULLIF(COUNT(DISTINCT customer_id), 0)) * 100 AS returning_customer_rate
+    COALESCE((COUNT(DISTINCT CASE WHEN order_count > 1 THEN customer_id END) * 100.0 / NULLIF(COUNT(DISTINCT customer_id), 0)), 0) AS returning_customer_rate
 FROM (
     SELECT
         customer_id,

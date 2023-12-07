@@ -181,3 +181,18 @@ def create_fact_popular_products():
     # Menutup koneksi
     cursor.close()
     conn.close()
+
+def create_fact_daily_returning_customer_rates():
+    # Membuat objek kursor
+    cursor = conn.cursor()
+    
+    # Membaca dan menjalankan isi file SQL
+    sql_file = open('dags/utils/data_modelling/script_sql/fact_daily_returning_customer_rates.sql', 'r')
+    cursor.execute(sql_file.read())
+    
+    # Commit perubahan (penting untuk perubahan yang mengubah data)
+    conn.commit()
+    
+    # Menutup koneksi
+    cursor.close()
+    conn.close()

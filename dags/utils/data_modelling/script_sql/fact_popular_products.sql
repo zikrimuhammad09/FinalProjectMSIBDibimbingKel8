@@ -1,6 +1,11 @@
 -- Popular Products
 CREATE TABLE data_modelling.fact_popular_products (
-/
+    id SERIAL PRIMARY KEY,
+    product_id INT,
+    product_name VARCHAR(100),
+    category_id INT,
+    total_quantity_sold INT,
+    total_revenue_generated DECIMAL(19, 4),
     FOREIGN KEY (product_id) REFERENCES data_modelling.dim_products(id),
     FOREIGN KEY (category_id) REFERENCES data_modelling.product_categories(id)
 );

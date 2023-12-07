@@ -10,3 +10,4 @@ from .model import create_product_categories
 from .model import create_suppliers
 from .model import create_fact_customer_conversion_rates
 from .model import create_fact_popular_products
+from .model import create_fact_daily_returning_customer_rates

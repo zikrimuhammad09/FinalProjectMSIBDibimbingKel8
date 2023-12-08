@@ -22,37 +22,6 @@ def remove_missing_values(df):
         # Hapus missing value
         df.dropna(inplace=True)
 
-def duplicate_data_customer(df_customer,df_order,df_login_attempts):
-    print('Proses handling duplicate data customer')
-    df_unique_customer = df_customer.drop_duplicates(keep='first')
-    # find df_customer duplicates but except first
-    df_duplicate_customer = df_customer[~df_customer.index.isin(df_unique_customer.index)]
-    for idx in df_unique_customer.index:
-        # find the row in df_customer that has the same each column in df_customer[idx] give new variable
-        matching_rows = df_duplicate_customer[df_duplicate_customer.eq(df_customer.loc[idx]).all(axis=1)]
-        # index matching_rows
-        matching_rows_index = matching_rows.index
-        # cari customer_id di df_order yang sama dengan matching_rows.index
-        matching_order = df_order[df_order['customer_id'].isin(matching_rows_index)]
-        # cari customer_id di df_login_attempts yang sama dengan matching_rows.index
-        matching_login_attempts = df_login_attempts[df_login_attempts['customer_id'].isin(matching_rows_index)]
-        # replace customer_id di df_order dengan idx
-        matching_order['customer_id'] = idx
-        # replace customer_id di df_login_attempts dengan idx
-        matching_login_attempts['customer_id'] = idx
-
-        # Update df_order with the modified values
-        df_order.loc[matching_order.index] = matching_order
-
-        # Update df_login_attempts with the modified values
-        df_login_attempts.loc[matching_login_attempts.index] = matching_login_attempts
-
-    df_customer = df_customer.drop_duplicates(keep='first')
-
-    print('Handling Duplikat data Customer selesai')
-    return df_customer, df_order, df_login_attempts
-
-
 def transform_data(**context):
     # Pull Data dari XCom
     df_order = context['ti'].xcom_pull(key='df_order')
@@ -87,9 +56,6 @@ def transform_data(**context):
     for df in [df_order, df_customer, df_coupons, df_login_attempts, df_product_category, df_product, df_supplier, df_order_item]:
         remove_duplicates(df)
         remove_missing_values(df)
-
-    # handling duplicate data customer
-    df_customer, df_order, df_login_attempts = duplicate_data_customer(df_customer, df_order, df_login_attempts)
 
     # Push Data ke XCom
     context['ti'].xcom_push(key='df_order', value=df_order)

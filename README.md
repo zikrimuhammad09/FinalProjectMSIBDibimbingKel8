@@ -1,4 +1,4 @@
-# Dibimbing - Kampus Merdeka 1 - Final Project Template
+# Kelompok 8 MSIB Dibimbing
 
 ## How to
 - In order to spin up the containers, first you have to build all the Docker images needed using 
@@ -38,25 +38,6 @@ Here is the place where you can modify or add a new docker stack if you decide t
 
 This folder contains script needed in order to automate an initializations process on docker-container setup.
 
----
-## Grading Criteria
-
-**Code Quality (20%)**
-- Code Readability (5%)
-- Code Efficiency (5%)
-- Documentation (10%)
-
-**Project Delivery (30%)**
-- Standard Template (6%)
-- Data Platform Improvisation (12%)
-- Data Modelling Improvisation (12%)
-
-**Implementation (40%)**
-- Data Extraction (Standard / Improved) (15%)
-- Data Pipeline (Standard / Best-Practice) (15%)
-- Data Analysis (10%)
-
-**Presentation (10%)**
-- Slide Content (4%)
-- Slide Design (3%)
-- Communication (3%)
+## Running Airflow
+There have 2 dag, dag_etl and dag_modelling.
+First, run dag_etl first then run dag_modelling

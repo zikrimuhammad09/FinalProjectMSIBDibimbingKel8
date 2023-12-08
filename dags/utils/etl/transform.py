@@ -50,9 +50,6 @@ def duplicate_data_customer(df_customer,df_order,df_login_attempts):
     df_customer = df_customer.drop_duplicates(keep='first')
 
     print('Handling Duplikat data Customer selesai')
-    print(df_customer.head(20))
-    print(df_order.head(50))
-    print(df_login_attempts(50))
     return df_customer, df_order, df_login_attempts
 
 
